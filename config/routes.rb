@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  
   devise_for :users
-  resources :restaurants
+  resources :restaurants do
+    resources :reviews
+  end
 
   get 'pages/about'
 
