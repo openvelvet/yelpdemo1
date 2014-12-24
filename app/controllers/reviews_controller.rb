@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_restaurant
   before_action :authenticate_user!
-  before_action :check_user, only: [:edit, :update, :destroy]
 
   respond_to :html
 
@@ -30,12 +29,12 @@ class ReviewsController < ApplicationController
     @review.save
     
     flash[:notice] = "Review was successfully created." if @review.save 
-    respond_with(@review, :location => root_path) 
+    respond_with(@review, :location => @restaurant) 
   end
 
   def update
     @review.update(review_params)
-    respond_with(@review)
+    respond_with(@review, :location => @restaurant)
   end
 
   def destroy
